@@ -1,0 +1,89 @@
+/* Yadh Hafsi — academic site stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Inter:wght@400;450;500;600&display=swap');
+
+:root{
+  --bg:#fbfaf7; --panel:#ffffff; --ink:#1d1c19; --ink-2:#57544a; --ink-3:#8c887a;
+  --accent:#7a2e2e; --accent-soft:#a05252; --rule:#e7e3d9; --tag:#f1eee5;
+  --serif:"Newsreader",Georgia,serif; --sans:"Inter",-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:450 16.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:840px;margin:0 auto;padding:0 28px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* Navigation */
+nav{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:baseline;gap:24px;padding:15px 28px}
+nav .name{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin-right:auto;letter-spacing:.01em}
+nav .name:hover{text-decoration:none;color:var(--accent)}
+nav a.lnk{color:var(--ink-2);font-size:14px;font-weight:500}
+nav a.lnk:hover{color:var(--accent);text-decoration:none}
+nav a.lnk.active{color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:2px}
+
+/* Chalkboard hero (home) */
+.hero{position:relative;color:#f5f3ec;background:#232c33 url('chalkboard.jpg') center/cover;padding:110px 0 100px;text-align:center}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(20,26,32,.45)}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,7vw,64px);letter-spacing:.01em}
+.hero p{margin-top:14px;font-size:15.5px;letter-spacing:.14em;text-transform:uppercase;color:#d9d5c8}
+
+/* Page header (inner pages) */
+.pagehead{padding:64px 0 8px}
+.pagehead h1{font-family:var(--serif);font-weight:500;font-size:clamp(32px,5vw,42px);letter-spacing:-.01em}
+.pagehead .rulewrap{width:56px;height:3px;background:var(--accent);margin-top:16px;border-radius:2px}
+
+main{padding:48px 0 24px}
+section{padding:6px 0 42px}
+h2{font-family:var(--serif);font-weight:500;font-size:28px;letter-spacing:-.01em;margin-bottom:18px}
+h3.group{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:36px 0 12px}
+p+p{margin-top:14px}
+
+/* Home layout */
+.bio{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:start}
+.bio img{width:100%;border-radius:10px;border:1px solid var(--rule);box-shadow:0 10px 30px rgba(30,25,15,.08)}
+.bio .links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.bio .links a{border:1px solid var(--rule);background:var(--panel);padding:7px 14px;border-radius:99px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.bio .links a:hover{border-color:var(--accent-soft);color:var(--accent);text-decoration:none}
+
+/* Publications */
+.pub{padding:15px 0;border-top:1px solid var(--rule)}
+.group+.pub{border-top:none;padding-top:2px}
+.pub .t{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.35}
+.pub .t a{color:var(--ink)} .pub .t a:hover{color:var(--accent)}
+.pub .meta{margin-top:4px;font-size:14.5px;color:var(--ink-2)}
+.pub .venue{color:var(--accent);font-weight:500}
+.pill{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;background:var(--tag);font-size:12px;font-weight:600;color:var(--ink-2);vertical-align:2px}
+
+/* Talks timeline */
+.tl{list-style:none}
+.tl li{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:10px 0;border-top:1px solid var(--rule);font-size:15.5px}
+.tl li:first-child{border-top:none}
+.tl .when{color:var(--ink-3);font-variant-numeric:tabular-nums;font-size:14px;padding-top:1.5px}
+.tl .what b{font-weight:600}
+.tl .where{color:var(--ink-2)}
+
+/* Teaching cards */
+.teach{display:grid;gap:14px}
+.tcard{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px 22px}
+.tcard .inst{font-family:var(--serif);font-size:19px;font-weight:500}
+.tcard ul{margin:8px 0 0 18px;color:var(--ink-2);font-size:15px}
+.tcard li{margin:3px 0}
+
+/* Contact */
+.contact-card{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:30px 34px;max-width:560px}
+.contact-card .row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--rule);font-size:15.5px}
+.contact-card .row:first-child{border-top:none}
+.contact-card .lbl{color:var(--ink-3);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+
+footer{border-top:1px solid var(--rule);margin-top:30px;padding:30px 0 44px;font-size:13.5px;color:var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
+
+@media(max-width:680px){
+  .bio{grid-template-columns:1fr}
+  .bio img{max-width:340px}
+  .tl li{grid-template-columns:1fr;gap:2px}
+  nav .wrap{gap:14px;flex-wrap:wrap}
+}
