@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code — Yadh Hafsi</title>
+<meta name="description" content="Open-source code accompanying the research papers of Yadh Hafsi: reinforcement learning for optimal execution, distributionally robust MDPs, and McKean–Vlasov generative modeling.">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.repo{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:24px 26px;margin-bottom:18px}
+.repo .rname{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.01em}
+.repo .rname .lang{margin-left:10px;font-weight:500;color:var(--ink-3);font-size:12.5px}
+.repo .paper{font-family:var(--serif);font-size:20px;font-weight:500;line-height:1.35;margin-top:6px}
+.repo .paper a{color:var(--ink)} .repo .paper a:hover{color:var(--accent)}
+.repo .desc{margin-top:8px;font-size:15px;color:var(--ink-2)}
+.repo .actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.repo .actions a{border:1px solid var(--rule);padding:6px 14px;border-radius:99px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.repo .actions a:hover{border-color:var(--accent-soft);color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="name" href="index.html">Yadh Hafsi</a>
+  <a class="lnk" href="index.html">Home</a>
+  <a class="lnk" href="research.html">Research</a>
+  <a class="lnk active" href="code.html">Code</a>
+  <a class="lnk" href="teaching.html">Teaching</a>
+  <a class="lnk" href="talks.html">Talks</a>
+  <a class="lnk" href="contact.html">Contact</a>
+</div></nav>
+
+<header class="pagehead"><div class="wrap">
+  <h1>Code</h1>
+  <div class="rulewrap"></div>
+</div></header>
+
+<main><div class="wrap">
+  <p style="color:var(--ink-2);margin-bottom:28px">Open-source implementations accompanying my research papers.</p>
+
+  <div class="repo">
+    <div class="rname">YadhHafsi/Policy-Gradient-Learning-for-Distributionally-Robust-Optimization<span class="lang">Python</span></div>
+    <div class="paper"><a href="https://arxiv.org/abs/2606.27610">Policy Gradient Learning for Distributionally Robust Markov Decision Processes under Wasserstein Ambiguity</a></div>
+    <div class="desc">Reference implementation of Algorithm&nbsp;1 of the paper. Reproduces all figures across four benchmarks: coin toss, inventory control, self-exciting bandits, and robust linear-quadratic control under Wasserstein ambiguity.</div>
+    <div class="actions">
+      <a href="https://github.com/YadhHafsi/Policy-Gradient-Learning-for-Distributionally-Robust-Optimization">View on GitHub</a>
+      <a href="https://arxiv.org/abs/2606.27610">Paper (arXiv)</a>
+    </div>
+  </div>
+
+  <div class="repo">
+    <div class="rname">murex/deep-mkv-gen<span class="lang">Python</span></div>
+    <div class="paper"><a href="https://arxiv.org/abs/2605.08928">Learning Generative Dynamics with Soft Law Constraints: A McKean–Vlasov FBSDE Approach</a></div>
+    <div class="desc">Official implementation of the Deep McKean–Vlasov generative model: learning generative dynamics for financial time series with soft law constraints via forward–backward SDEs.</div>
+    <div class="actions">
+      <a href="https://github.com/murex/deep-mkv-gen">View on GitHub</a>
+      <a href="https://arxiv.org/abs/2605.08928">Paper (arXiv)</a>
+    </div>
+  </div>
+
+  <div class="repo">
+    <div class="rname">TomasEspana/qrm_optimal_execution<span class="lang">Jupyter Notebook</span></div>
+    <div class="paper"><a href="https://arxiv.org/abs/2511.15262">Reinforcement Learning for Optimal Execution with the Queue Reactive Model</a></div>
+    <div class="desc">Implementation of the reinforcement-learning approach to optimal execution in a queue-reactive limit order book model, including the market simulator and training notebooks.</div>
+    <div class="actions">
+      <a href="https://github.com/TomasEspana/qrm_optimal_execution">View on GitHub</a>
+      <a href="https://arxiv.org/abs/2511.15262">Paper (arXiv)</a>
+    </div>
+  </div>
+
+  <div class="repo">
+    <div class="rname">YadhHafsi/Optimal-Execution-under-Incomplete-Information<span class="lang">Jupyter Notebook</span></div>
+    <div class="paper"><a href="https://arxiv.org/pdf/2411.04616">Optimal Execution under Incomplete Information</a></div>
+    <div class="desc">Numerical solvers and simulation experiments supporting the paper: optimal execution with partial information on liquidity, via stochastic filtering and control.</div>
+    <div class="actions">
+      <a href="https://github.com/YadhHafsi/Optimal-Execution-under-Incomplete-Information">View on GitHub</a>
+      <a href="https://arxiv.org/pdf/2411.04616">Paper (arXiv)</a>
+    </div>
+  </div>
+
+</div></main>
+
+<footer><div class="wrap">
+  <span>© 2026 Yadh Hafsi</span>
+  <span><a href="https://scholar.google.com/citations?user=r-_Ph0QAAAAJ&amp;hl=en">Google Scholar</a> · <a href="https://www.linkedin.com/in/yadh-hafsi-90352016a/">LinkedIn</a></span>
+</div></footer>
+
+</body>
+</html>
