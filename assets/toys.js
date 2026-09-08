@@ -61,14 +61,14 @@ function gauss(rng){let u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();return M
     ctx.strokeStyle=C.ink3; ctx.setLineDash([4,4]);
     ctx.beginPath(); ctx.moveTo(X(nomMu),46); ctx.lineTo(X(advMu),46); ctx.stroke(); ctx.setLineDash([]);
     ctx.fillStyle=C.ink3; ctx.font='11px Inter,sans-serif';
-    if(rho>0.02) ctx.fillText('W-distance ≤ ρ', (X(nomMu)+X(advMu))/2-34, 40);
+    if(rho>0.02) ctx.fillText('W-distance ≤ ε', (X(nomMu)+X(advMu))/2-34, 40);
     ctx.fillStyle=C.blue; ctx.fillText('nominal model P₀', X(nomMu)-46, 66);
     ctx.fillStyle=C.accent; ctx.fillText('worst-case P*', X(advMu)+8, 82);
     // robust value readout
     const val = (1.00 - 0.55*rho).toFixed(2);
     ctx.fillStyle=C.ink2; ctx.font='12px Inter,sans-serif';
     ctx.fillText('robust value J(θ) = '+val, W-pad-140, 28);
-    lbl.textContent = 'ρ = '+rho.toFixed(2);
+    lbl.textContent = 'ε = '+rho.toFixed(2);
   }
   slider.addEventListener('input',draw);
   window.addEventListener('resize',draw);
