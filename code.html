@@ -25,6 +25,7 @@
 .toy .ctrl input[type=range]{flex:1;min-width:120px;accent-color:var(--accent)}
 .toy .ctrl button{border:1px solid var(--rule);background:var(--bg);padding:5px 14px;border-radius:99px;font-size:13px;color:var(--ink-2);cursor:pointer}
 .toy .ctrl button:hover{border-color:var(--accent-soft);color:var(--accent)}
+.toy .ctrl select{border:1px solid var(--rule);background:var(--bg);padding:4px 10px;border-radius:99px;font-size:13px;color:var(--ink-2)}
 .toy .ctrl label{display:flex;align-items:center;gap:6px;cursor:pointer}
 .toy .ctrl .val{font-variant-numeric:tabular-nums;color:var(--ink-3);min-width:64px}
 </style>
@@ -56,6 +57,15 @@
     <div class="actions">
       <a href="https://github.com/YadhHafsi/Optimal-Execution-with-Reinforcement-Learning-in-a-Multi-Agent-Market-Simulator">View on GitHub</a>
       <a href="https://arxiv.org/abs/2411.06389">Paper (arXiv)</a>
+    </div>
+    <div class="toy">
+      <canvas id="toy-exec" height="270"></canvas>
+      <div class="ctrl">
+        <span>price trend</span>
+        <select id="toy-exec-drift"><option value="random">random</option><option value="up">up</option><option value="down">down</option><option value="none">none</option></select>
+        <button id="toy-exec-new">New sample path</button>
+      </div>
+      <span class="figcap">Illustrative (stylised random walk, not simulator output): buying a fixed order over the window, TWAP spreads it evenly; a schedule that tilts within a corridor buys faster after price rises and slower after falls. In this toy model it saves about 2 price units per share on average when a trend persists (up or down) and is break-even when there is none.</span>
     </div>
   </div>
 
@@ -141,6 +151,6 @@
   <span><a href="https://scholar.google.com/citations?user=r-_Ph0QAAAAJ&amp;hl=en">Google Scholar</a> · <a href="https://www.linkedin.com/in/yadh-hafsi-90352016a/">LinkedIn</a></span>
 </div></footer>
 
-<script src="assets/toys.js?v=2"></script>
+<script src="assets/toys.js?v=3"></script>
 </body>
 </html>

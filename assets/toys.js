@@ -227,4 +227,83 @@ function gauss(rng){let u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();return M
   window.addEventListener('resize',draw);
   simulate(); draw();
 })();
+
+/* ---------- 5. Optimal execution: TWAP vs a schedule that tilts with the trend ---------- */
+(function(){
+  const cv = setupCanvas('toy-exec', 270); if(!cv) return;
+  const sel = document.getElementById('toy-exec-drift');
+  const btn = document.getElementById('toy-exec-new');
+  const N = 180, W_BAND = 0.2, LOOK = 30, THR = 3.0, SIGMA = 0.8, MU = 0.12;
+  let seed = 7, prog = 0, hold = 0, sim = null;
+  function simulate(){
+    const rng = mulberry32(seed*7919+13);
+    let d = sel.value; if(d==='random') d = rng()<0.5 ? 'up' : 'down';
+    const mu = d==='up' ? MU : d==='down' ? -MU : 0;
+    const p = [100]; for(let k=1;k<=N;k++) p.push(p[k-1] + mu + SIGMA*gauss(rng));
+    // TWAP: 1/N of the order per step. Tilted: rate multiplier 2 / 1 / 0 from the trailing move,
+    // cumulative executed fraction kept inside a corridor around the TWAP schedule that closes on 1.
+    const twap=[0], tilt=[0];
+    let cT=0, cA=0, costT=0, costA=0;
+    const costTw=[0], costTl=[0];
+    for(let k=1;k<=N;k++){
+      cT = k/N; const qT = cT - twap[k-1];
+      const trail = k>LOOK ? p[k-1]-p[k-1-LOOK] : 0;
+      const m = trail>THR ? 2 : (trail<-THR ? 0 : 1);
+      const s = k/N;
+      const lo = Math.max(0, s-W_BAND, 1-2*(1-s)), hi = Math.min(1, s+W_BAND);
+      cA = Math.min(Math.max(cA + m/N, lo), Math.max(lo,hi));
+      if(k===N) cA = 1;
+      const qA = cA - tilt[k-1];
+      twap.push(cT); tilt.push(cA);
+      costT += qT*(p[k]-p[0]); costA += qA*(p[k]-p[0]);
+      costTw.push(costT); costTl.push(costA);
+    }
+    sim = {p, twap, tilt, costTw, costTl, d};
+  }
+  function draw(){
+    const ctx = cv._resize();
+    const Wd = cv.clientWidth, H = 270, pad = 34;
+    ctx.clearRect(0,0,Wd,H);
+    const k = Math.max(1, Math.min(N, Math.floor(prog*N)));
+    const X = i => pad + i/N*(Wd-2*pad);
+    // price panel
+    const t0=14, t1=128;
+    const mn = Math.min(...sim.p)-1, mx = Math.max(...sim.p)+1;
+    const Yp = v => t1 - (v-mn)/(mx-mn)*(t1-t0);
+    ctx.strokeStyle=C.rule; ctx.lineWidth=1; ctx.strokeRect(pad,t0,Wd-2*pad,t1-t0);
+    ctx.setLineDash([4,4]); ctx.strokeStyle=C.ink3; ctx.beginPath(); ctx.moveTo(pad,Yp(sim.p[0])); ctx.lineTo(Wd-pad,Yp(sim.p[0])); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); for(let i=0;i<=k;i++){ const x=X(i), y=Yp(sim.p[i]); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+    ctx.strokeStyle=C.blue; ctx.lineWidth=1.7; ctx.stroke();
+    ctx.fillStyle=C.ink3; ctx.font='11px Inter,sans-serif'; ctx.fillText('mid price (arrival level dashed)', pad+6, t0+13);
+    // executed-fraction panel
+    const b0=150, b1=232;
+    const Ye = v => b1 - v*(b1-b0);
+    ctx.strokeStyle=C.rule; ctx.strokeRect(pad,b0,Wd-2*pad,b1-b0);
+    // corridor
+    ctx.beginPath();
+    for(let i=0;i<=N;i++){ const s=i/N, hi=Math.min(1,s+W_BAND); const x=X(i), y=Ye(hi); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+    for(let i=N;i>=0;i--){ const s=i/N, lo=Math.max(0,s-W_BAND,1-2*(1-s)); ctx.lineTo(X(i),Ye(lo)); }
+    ctx.closePath(); ctx.fillStyle='rgba(61,106,143,.07)'; ctx.fill();
+    ctx.setLineDash([4,4]); ctx.strokeStyle=C.ink3; ctx.beginPath(); ctx.moveTo(X(0),Ye(0)); ctx.lineTo(X(N),Ye(1)); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); for(let i=0;i<=k;i++){ const x=X(i), y=Ye(sim.tilt[i]); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }
+    ctx.strokeStyle=C.accent; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle=C.ink3; ctx.fillText('executed fraction: TWAP (dashed), tilted schedule (red), corridor (shaded)', pad+6, b0+13);
+    ctx.fillText('time  →', Wd-pad-40, b1+16);
+    // readout: average price paid minus arrival, per share, in price units (lower is better)
+    const cT = sim.costTw[k]/Math.max(sim.twap[k],1e-9), cA = sim.costTl[k]/Math.max(sim.tilt[k],1e-9);
+    ctx.fillStyle=C.ink2; ctx.font='12px Inter,sans-serif';
+    const txt = 'avg. price paid − arrival:  TWAP '+cT.toFixed(1)+'   tilted '+cA.toFixed(1);
+    ctx.fillText(txt, pad, H-8);
+  }
+  function loop(){
+    if(prog<1){ prog = Math.min(1, prog+0.0035); }
+    else if(++hold>150){ seed++; hold=0; prog=0; simulate(); }
+    draw(); requestAnimationFrame(loop);
+  }
+  function restart(){ hold=0; prog=0; simulate(); draw(); }
+  sel.addEventListener('change', restart);
+  btn.addEventListener('click', ()=>{ seed++; restart(); });
+  window.addEventListener('resize', draw);
+  simulate(); draw(); loop();
+})();
 })();
