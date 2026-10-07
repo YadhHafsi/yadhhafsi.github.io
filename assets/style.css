@@ -106,3 +106,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
   .bio.home .rest{margin-top:14px}
   .bio.home .news{margin-top:10px}
 }
+/* Home spacing scale: 14 between paragraphs, 22 before the link buttons, 44 before a new block, 12 between a label and its list.
+   The global section padding is not applied twice (the news block is nested in the bio section). */
+.bio.home{padding-bottom:18px}
+.bio.home .news{padding:0;margin-top:8px}
+.bio.home .news h3.group{margin-top:36px;margin-bottom:10px}
+.news .tl li{grid-template-columns:1fr;gap:2px;padding:12px 0}
+.news .tl li:first-child{padding-top:2px}
+.news .tl .when{padding-top:0;font-size:13px}
+.news .more{margin-top:6px}
+@media(min-width:681px){
+  .bio.home>img{position:sticky;top:84px;align-self:start}
+}
