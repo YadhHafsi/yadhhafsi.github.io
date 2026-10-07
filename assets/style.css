@@ -42,7 +42,7 @@ h3.group{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:up
 p+p{margin-top:14px}
 
 /* Home layout */
-.bio{display:grid;grid-template-columns:300px 1fr;gap:40px;align-items:start}
+.bio{display:grid;grid-template-columns:300px 1fr;gap:0 40px;align-items:start}
 .bio img{width:100%;border-radius:10px;border:1px solid var(--rule);box-shadow:0 10px 30px rgba(30,25,15,.08)}
 .bio .links{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
 .bio .links a{border:1px solid var(--rule);background:var(--panel);padding:7px 14px;border-radius:99px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
@@ -83,6 +83,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
 
 @media(max-width:680px){
   .bio{grid-template-columns:1fr}
+  .bio.home{grid-template-areas:"img" "intro" "news" "featured" "rest"}
+  .bio.home .rest{margin-top:34px}
   .bio img{max-width:340px}
   .tl li{grid-template-columns:1fr;gap:2px}
   nav .wrap{gap:14px;flex-wrap:wrap}
@@ -92,3 +94,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
 .news{margin-top:44px}
 .news .more{margin-top:10px;font-size:14px;color:var(--ink-3)}
 .news .tl{padding:0}
+/* Home: unified layout. Desktop: photo | intro + rest, then news and featured full width. Mobile: news and featured come right after the first paragraph. */
+.bio.home{grid-template-areas:"img intro" "img rest" "news news" "featured featured"}
+.bio.home>img{grid-area:img}
+.bio.home .intro{grid-area:intro}
+.bio.home .rest{grid-area:rest;margin-top:14px}
+.bio.home .news{grid-area:news;margin-top:48px}
+.bio.home .featured{grid-area:featured;margin-top:8px}
+.featured .more{margin-top:10px;font-size:14px;color:var(--ink-3)}
