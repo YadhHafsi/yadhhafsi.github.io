@@ -118,15 +118,3 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
 @media(min-width:681px){
   .bio.home>img{position:sticky;top:84px;align-self:start}
 }
-
-/* Consent banner */
-.consent{position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;z-index:50;
-  background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;
-  box-shadow:0 10px 30px rgba(30,25,15,.14);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.consent p{margin:0;flex:1;min-width:200px;font-size:14px;line-height:1.5;color:var(--ink-2)}
-.consent-actions{display:flex;gap:8px}
-.consent button{font:500 13.5px var(--sans);padding:7px 16px;border-radius:99px;cursor:pointer;
-  border:1px solid var(--rule);background:var(--bg);color:var(--ink-2)}
-.consent button:hover{border-color:var(--accent-soft);color:var(--accent)}
-.consent .consent-accept{background:var(--accent);border-color:var(--accent);color:#fff}
-.consent .consent-accept:hover{color:#fff;opacity:.9}
